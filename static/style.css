@@ -1,0 +1,212 @@
+.alert-success {
+    color: green;
+    background-color: #d4edda;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.alert-danger {
+    color: red;
+    background-color: #f8d7da;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* 🎄 General Page Styles */
+body {
+    background: linear-gradient(to bottom, #1a1a2e, #16213e);
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    overflow-x: hidden;
+    padding: 8%;
+}
+
+/* ❄️ Add a subtle snowfall effect */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('https://cdn.pixabay.com/photo/2017/12/09/18/24/snow-3005933_1280.png') repeat;
+    opacity: 0.1;
+    z-index: -1;
+}
+
+/* 🎅 Navbar */
+nav {
+    background: rgba(255, 0, 0, 0.8);
+    padding: 10px;
+    border-radius: 10px;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+nav ul li {
+    display: inline;
+}
+
+nav ul li a {
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+nav ul li a:hover {
+    background: gold;
+    color: black;
+}
+
+/* ❄️ Fancy Neon Glow for Titles */
+h2, h3 {
+    font-family: 'Pacifico', cursive;
+    text-shadow: 0px 0px 10px rgba(255, 0, 0, 0.8);
+}
+
+/* 🛑 Flash Messages */
+.alert {
+    border-radius: 10px;
+    font-weight: bold;
+    padding: 15px;
+    margin: 15px 0;
+}
+
+.alert-success {
+    color: white;
+    background-color: #28a745;
+    box-shadow: 0px 0px 15px #28a745;
+}
+
+.alert-danger {
+    color: white;
+    background-color: #dc3545;
+    box-shadow: 0px 0px 15px #dc3545;
+}
+
+/* 🎁 Buttons - Glow Effect */
+.btn {
+    padding: 10px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-primary {
+    background: #ff4757;
+    color: white;
+    box-shadow: 0px 0px 15px #ff4757;
+}
+
+.btn-primary:hover {
+    background: #ff6b81;
+    box-shadow: 0px 0px 20px #ff6b81;
+}
+
+.btn-success {
+    background: #2ecc71;
+    color: white;
+    box-shadow: 0px 0px 15px #2ecc71;
+}
+
+.btn-success:hover {
+    background: #27ae60;
+    box-shadow: 0px 0px 20px #27ae60;
+}
+
+.btn-warning {
+    background: #f39c12;
+    color: white;
+    box-shadow: 0px 0px 15px #f39c12;
+}
+
+.btn-warning:hover {
+    background: #e67e22;
+    box-shadow: 0px 0px 20px #e67e22;
+}
+
+/* 🎄 Card Styling */
+.card,.container {
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    border: 2px solid #ff4757;
+    box-shadow: 0px 0px 15px rgba(255, 71, 87, 0.8);
+    padding: 100px;
+    border-radius: 10px;
+}
+
+/* 🎅 Input Fields */
+input[type="text"], 
+input[type="email"], 
+input[type="password"], 
+input[type="number"], 
+input[type="url"], 
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 2px solid #ff4757;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-size: 16px;
+}
+
+input:focus, textarea:focus {
+    outline: none;
+    border-color: gold;
+    box-shadow: 0px 0px 15px gold;
+}
+
+/* ❄️ Snowfall Animation */
+@keyframes snowfall {
+    0% { transform: translateY(0px); }
+    100% { transform: translateY(800px); }
+}
+
+.snowflake {
+    position: absolute;
+    top: -10px;
+    width: 10px;
+    height: 10px;
+    background: white;
+    opacity: 0.8;
+    border-radius: 50%;
+    animation: snowfall 10s linear infinite;
+}
+
+.btn.btn-primary {
+    background-color: #007bff; /* Bootstrap primary blue */
+    border: none;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    box-shadow: 0 0 10px #007bff; /* Blue glow effect */
+}
+
+.btn.btn-primary:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    box-shadow: 0 0 20px #007bff; /* Stronger glow on hover */
+}
+
+.btn.btn-primary:active {
+    transform: scale(0.95); /* Slight press effect */
+}
+
+

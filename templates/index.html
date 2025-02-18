@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Welcome to Secret Santa{% endblock %}
+
+{% block content %}
+
+<h2>Welcome to Secret Santa, Celebrate this christmas with games and gifts!</h2>
+<div class="container mt-5 text-center">
+    <h3>Join the fun! Register or log in to participate.</h3>
+
+    <a href="{{ url_for('auth.register') }}" class="btn btn-primary">Register</a>
+    <a href="{{ url_for('auth.login') }}" class="btn btn-success">Login</a>
+</div>
+{% endblock %}

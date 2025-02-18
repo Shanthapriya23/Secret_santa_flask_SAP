@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Send Task to Secret Child{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Send a Fun Task to Your Secret Child</h2>
+
+    <form method="POST" action="{{ url_for('profile_bp.send_task_to_secret_child') }}">
+        <div class="mb-3">
+            <label for="task" class="form-label">Task</label>
+            <textarea id="task" name="task" class="form-control" rows="4" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Send Task</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}Gift Registration{% endblock %}
+
+{% block content %}
+<h2>🎅🎄 Secret Santa - 🎁✨ "Unwrap the Mystery, Spread the Joy! 🎁✨</h2>
+<div class="container mt-5">
+    <h2 class="text-center">Available Gifts</h2>
+
+    {% if gifts %}
+        <ul class="list-group">
+            {% for gift in gifts %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <div>
+                        <strong>{{ gift.gift_name }}</strong> - {{ gift.brand or "N/A" }} ({{ gift.model_version or "N/A" }}) - ${{ gift.price or "N/A" }}
+                        {% if gift.amazon_link %}
+                            <a href="{{ gift.amazon_link }}" target="_blank" class="btn btn-sm btn-info">View on Amazon</a>
+                        {% endif %}
+                    </div>
+                    <form method="POST" action="{{ url_for('gifts.lock_gift', gift_id=gift.id) }}">
+                        <button type="submit" class="btn btn-warning btn-sm">Lock Gift</button>
+                    </form>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="text-center">No gifts available for selection.</p>
+    {% endif %}
+
+    <div class="mt-4 text-center">
+        <a href="{{ url_for('profile_bp.profile') }}" class="btn btn-secondary">Back to Profile</a>
+    </div>
+</div>
+{% endblock %}

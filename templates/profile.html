@@ -1,0 +1,142 @@
+{% extends "base.html" %}
+
+{% block title %}Profile Management{% endblock %}
+
+{% block content %}
+<h2>🎅🎄 Secret Santa - 🎁✨ "Unwrap the Mystery, Spread the Joy! 🎁✨</h2>
+<div class="container mt-5">
+    <!-- Display User Details -->
+    <h3> Profile </h3>
+    <div class="card p-3 mb-4">
+        <p><strong>Name:</strong> {{ user.name }}</p>
+        <p><strong>Employee Number:</strong> {{ user.employee_number }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>Address:</strong> {{ user.address }}</p>
+        <p><strong>Contact:</strong> {{ user.contact }}</p>
+    </div>
+
+    <!-- Update Address & Contact Details -->
+    <form method="POST" action="{{ url_for('profile_bp.profile') }}">
+        {{ profile_form.hidden_tag() }}  <!-- CSRF Protection -->
+
+        <div class="mb-3">
+            {{ profile_form.address.label(class="form-label") }}
+            {{ profile_form.address(class="form-control") }}
+        </div>
+
+        <div class="mb-3">
+            {{ profile_form.contact.label(class="form-label") }}
+            {{ profile_form.contact(class="form-control") }}
+        </div>
+
+        <button name="submit" type="submit" class="btn btn-primary">Update Profile</button>
+    </form>
+
+    <hr class="my-4">
+    
+    <div class="card p-3 mb-4">
+    <h3>Secret Santa section:</h3>
+    <br>
+    <!-- Display Secret Santa (if revealed) -->
+    {% if secret_santa %}
+    <div class="mt-4">
+        <p><strong>Your Secret Santa:</strong> {{ secret_santa.name }}</p>
+        
+        {% if task_received_from_santa %}
+            <p><strong>Task Assigned by Your Secret Santa:</strong> {{ task_received_from_santa.task }}</p>
+        {% else %}
+            <p class="text-warning">Your Secret Santa has not assigned a task yet.</p>
+        {% endif %}
+    </div>
+    {% else %}
+    <p class="text-warning">Your Secret Santa has not revealed their identity yet.</p>
+    {% endif %}
+    </div>
+
+    <hr>
+    <div class="card p-3 mb-4">
+    <h3>Secret Child section:</h3>
+    <br>
+    <!-- Display Secret Child if a gift is locked -->
+    {% if secret_child_name %}
+        <p><strong>Your Secret Child:</strong> {{ secret_child_name }}</p>
+        
+        <form method="POST" action="{{ url_for('profile_bp.send_task_to_secret_child') }}">
+            <button type="submit" class="btn btn-info">Send Tasks to Your Secret Child</button>
+        </form>
+        
+        {% if task_given_to_child %}
+            <p><strong>Task Given to Your Secret Child:</strong> {{ task_given_to_child.task }}</p>
+        {% endif %}
+        
+        <form method="POST" action="{{ url_for('profile_bp.reveal_secret_santa') }}">
+            <button type="submit" class="btn btn-warning">Reveal My Name to My Secret Child</button>
+        </form>
+    {% else %}
+        <p class="text-danger">You have not locked a gift yet. Go to the Gift Registration page to lock a gift.</p>
+    {% endif %}
+    </div>
+
+    <hr>
+    <div class="card p-3 mb-4">
+    <h3 class="mt-4">Your Wishlist for this christmas </h3>
+
+    {% if wishlist_gift %}
+        <p class="text-danger">You have already added a gift to your wishlist.</p>
+        <ul class="list-group">
+            <li class="list-group-item"><strong>Gift Name:</strong> {{ wishlist_gift.gift_name }}</li>
+            {% if wishlist_gift.brand %}
+                <li class="list-group-item"><strong>Brand:</strong> {{ wishlist_gift.brand }}</li>
+            {% endif %}
+            {% if wishlist_gift.model_version %}
+                <li class="list-group-item"><strong>Model/Version:</strong> {{ wishlist_gift.model_version }}</li>
+            {% endif %}
+            {% if wishlist_gift.price %}
+                <li class="list-group-item"><strong>Price:</strong> ${{ wishlist_gift.price }}</li>
+            {% endif %}
+            {% if wishlist_gift.amazon_link %}
+                <li class="list-group-item"><strong>Amazon Link:</strong> 
+                    <a href="{{ wishlist_gift.amazon_link }}" target="_blank">View</a>
+                </li>
+            {% endif %}
+        </ul>
+    {% else %}
+        <!-- Wishlist Form (Only Shown If No Gift Exists) -->
+        <form method="POST" action="{{ url_for('profile_bp.gift_asked_page') }}">
+            {{ wishlist_form.hidden_tag() }}  <!-- CSRF Protection -->
+
+            <div class="mb-3">
+                {{ wishlist_form.gift_name.label(class="form-label") }}
+                {{ wishlist_form.gift_name(class="form-control", required=True) }}
+            </div>
+
+            <div class="mb-3">
+                {{ wishlist_form.brand.label(class="form-label") }}
+                {{ wishlist_form.brand(class="form-control") }}
+            </div>
+
+            <div class="mb-3">
+                {{ wishlist_form.model_version.label(class="form-label") }}
+                {{ wishlist_form.model_version(class="form-control") }}
+            </div>
+
+            <div class="mb-3">
+                {{ wishlist_form.price.label(class="form-label") }}
+                {{ wishlist_form.price(class="form-control", type="number", step="0.01") }}
+            </div>
+
+            <div class="mb-3">
+                {{ wishlist_form.amazon_link.label(class="form-label") }}
+                {{ wishlist_form.amazon_link(class="form-control", type="url") }}
+            </div>
+
+            <button name="submit" type="submit" class="btn btn-success" value="Add to Wishlist">Add to Wishlist</button>
+        </form>
+    {% endif %}
+    </div>
+    <div class="mt-4 text-center">
+        <a href="{{ url_for('gifts.view_gift_pool') }}" class="btn btn-success">Go to Gift Registration</a>
+    </div>
+
+</div>
+{% endblock %}
